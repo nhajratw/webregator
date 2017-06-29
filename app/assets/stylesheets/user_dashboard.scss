@@ -1,0 +1,49 @@
+// Place all the styles related to the userDashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-size:1.5em;
+}
+
+input, button {
+  height: 8vh;
+  font-size:1.5em;
+  border-color: #333;
+  background: #FFF;
+}
+
+dynamic-text {
+  display: block;
+  height: 5vh;
+}
+
+webmark-list {
+    display: block;
+    border: 2px solid #444;
+    width: 60vw;
+    height: 60vh;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5vh;
+    overflow-y: scroll;
+}
+
+web-mark {
+  display:block;
+}
+
+// Scrollbar Styling
+webmark-list::-webkit-scrollbar {
+    width: 1em;
+}
+
+webmark-list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+webmark-list::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
