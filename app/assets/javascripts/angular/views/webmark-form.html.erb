@@ -1,0 +1,24 @@
+<input type="text" ng-model="example" style="width: 25vw;" autofocus>
+<button type="button" name="button" ng-click="$wmfm.urlGet()">SUBMIT URL</button>
+<dynamic-text ng-bind="example"></dynamic-text>
+
+
+<webmark-dialog ng-hide="!webformDialog">
+  <dialog-head>
+    <h1 id="site-url">Site URL</h1>
+    <button id="cancel" type="button" name="button" ng-click="$wmfm.cancel()">CANCEL</button>
+  </dialog-head>
+
+  <url-content>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <ul>
+      <li ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </li>
+    </ul>
+  </url-content>
+  <dialog-save>
+    <button id="save" type="button" name="button">SAVE URL</button>
+  </dialog-save>
+</webmark-dialog>

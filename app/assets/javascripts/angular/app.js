@@ -1,4 +1,5 @@
-angular.module('app', ['templates'])
+(function() {
+angular.module('app', ['templates', 'webmarkForm'])
   .component('webmarkList', {
     templateUrl: 'webmark.html',
     controller: function() {
@@ -7,3 +8,4 @@ angular.module('app', ['templates'])
     },
     controllerAs: '$wm'
   });
+}());

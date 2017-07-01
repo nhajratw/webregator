@@ -23,4 +23,4 @@
 .byebug_history
 
 vendor/assets/bower_components
-vendor/assets/local
+vendor/local
