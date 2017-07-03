@@ -1,0 +1,2 @@
+class Webmark < ApplicationRecord
+end

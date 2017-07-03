@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :webmarks
   get 'user_dashboard/index'
   root 'user_dashboard#index'
 

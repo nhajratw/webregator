@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @webmark.url %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @webmark.content %>
+</p>
+
+<%= link_to 'Edit', edit_webmark_path(@webmark) %> |
+<%= link_to 'Back', webmarks_path %>
