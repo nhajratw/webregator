@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/indexer' => 'webmark_indexer#index'
+
   resources :webmarks
   get 'user_dashboard/index'
   root 'user_dashboard#index'

@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
 angular.module('webmarkForm', []);
 angular.module('webmarkForm', [])
   .component('webmarkForm', {
@@ -6,16 +7,24 @@ angular.module('webmarkForm', [])
     controller: webmarkForm,
     controllerAs: '$wmfm'
   })
-  webmarkForm.$inject = ['$scope'];
-  function webmarkForm($scope) {
-    // webmarkList controller
+  webmarkForm.$inject = ['$scope', 'WebMark'];
+  function webmarkForm($scope, WebMark) {
+    var $wmfm = this;
     $scope.webformDialog = false;
-    this.site = {url:'www.example.org'}
-    this.cancel = function(){
+    $wmfm.cancel = function(urlInput){
       $scope.webformDialog = !$scope.webformDialog;
+      $scope.url.input = '';
     }
-    this.urlGet = function(){
-      $scope.webformDialog = true;
-    }
+    $wmfm.urlGet = function(webmark){
+      $scope.webformDialog = (webmark.url_input.$valid)? true:false;
+      console.log(webmark.url_input, 'the input');
+        if ($scope.webformDialog == true){
+          $wmfm.loaded = WebMark.getNew(webmark.url_input.$viewValue);
+          $wmfm.loaded.$promise.then(function(response){
+            console.log(response);
+          })
+
+        }
+    }// End of urlGet
   }
 }());

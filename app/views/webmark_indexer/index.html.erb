@@ -1,0 +1,5 @@
+<h1>Webmark Indexer</h1>
+<%= form_tag({:controller=>"webmark_indexer", :action=>"index"}, method: :get) do %>
+  <%= url_field_tag :wm_url %>
+  <%= submit_tag 'Get url', name: nil %>
+<% end %>

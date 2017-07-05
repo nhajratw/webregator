@@ -1,0 +1,2 @@
+module WebmarkIndexerHelper
+end

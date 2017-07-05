@@ -1,22 +1,30 @@
-<input type="text" ng-model="example" style="width: 25vw;" autofocus>
-<button type="button" name="button" ng-click="$wmfm.urlGet()">SUBMIT URL</button>
-<dynamic-text ng-bind="example"></dynamic-text>
-
+<form name="webmark">
+  <input type="url" name="url_input" ng-model="url.input" style="width: 25vw;" autofocus required>
+  <button type="button" name="button" ng-click="$wmfm.urlGet(webmark)">SUBMIT URL</button>
+</form>
+<dynamic-text ng-bind="url.input"></dynamic-text>
+<div class="error" ng-hide="webmark.url_input.$valid">
+  <span class="error" ng-show="webmark.url_input.$error.required">
+    Enter a link</span>
+  <span class="error" ng-show="webmark.url_input.$error.url">
+    Enter a valid link (example: https://medium.com/javascript-scene/how-to-turn-a-job-opening-into-a-dream-job-for-top-talent-14b63f03146d)</span>
+</div>
 
 <webmark-dialog ng-hide="!webformDialog">
   <dialog-head>
-    <h1 id="site-url">Site URL</h1>
-    <button id="cancel" type="button" name="button" ng-click="$wmfm.cancel()">CANCEL</button>
+    <h1 id="site-url">{{url.input | limitTo: 40}}
+      <span ng-if="url.input.length >= 40">...</span>
+    </h1>
+    <button id="cancel" type="button" name="button" ng-click="$wmfm.cancel(url.input)">CANCEL</button>
   </dialog-head>
 
   <url-content>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    <ul>
-      <li ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </li>
-    </ul>
+    <h3 ng-repeat="element in $wmfm.loaded.htags" ng-bind="element.content">
+    </h3>
+    <p ng-repeat="element in $wmfm.loaded.atags">
+      <a ng-href="{{element.a_link}}" ng-bind="element.a_link" target="_blank">
+      </a>
+    </p>
   </url-content>
   <dialog-save>
     <button id="save" type="button" name="button">SAVE URL</button>

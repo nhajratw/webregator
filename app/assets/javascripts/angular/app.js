@@ -1,15 +1,15 @@
 (function() {
-angular.module('app', ['templates', 'ngResource', 'webmarkForm', 'wm.service'])
-  .component('webmarkList', {
-    templateUrl: 'webmark-list.html',
-    controller: webmarkList,
-    controllerAs: '$wmlt'
-  })
-  webmarkList.$inject = ['$scope', 'WebMark'];
-  function webmarkList($scope, WebMark) {
-    // webmarkList controller
-    this.webmarks = WebMark.getAll();
-    console.log(this.webmarks, 'res');
-    this.site = {url:'www.example.xyz'}
-  }
+  'use strict';
+angular.module('app', [
+  'templates',
+  'ngResource',
+  'webmarkForm',
+  'webmarkList',
+  'wm.service'
+])
+  .config(["$httpProvider", function($httpProvider) {
+    var csrfToken = document.getElementsByName("csrf-token")[0].content
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = csrfToken;
+  // CSRF protection. Access to X-CSRF-Token for Angular
+  }])
 }());

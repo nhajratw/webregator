@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
 angular.module('wm.service', []);
 angular.module('wm.service')
   .service('WebMark', WebMarkService)
@@ -16,6 +17,15 @@ angular.module('wm.service')
          console.log('Error getting all webmarks: ', error);
        });
     }; // END of getAll()
+    service.getNew = function(urlInput){
+      var resource = $resource('/indexer.json?wm_url='+':url', {url: '@url'},{
+        content: { method: 'GET', isArray: false }
+      })
+      return resource.content({url: urlInput}, function(response){
+      }, function(error){
+        console.log('Error getting new url: ', error);
+      });
+    }; // END of getNew()
   }
 
 }());
