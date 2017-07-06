@@ -12,4 +12,6 @@ angular.module('app', [
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = csrfToken;
   // CSRF protection. Access to X-CSRF-Token for Angular
   }])
+  // ADD Lodash
+  .constant('_', window._)
 }());

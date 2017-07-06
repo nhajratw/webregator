@@ -7,6 +7,7 @@ end
 
 gem "bower-rails"
 gem 'angular-rails-templates'
+gem 'lodash-rails'
 
 gem "responders"
 

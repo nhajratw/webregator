@@ -1,5 +1,6 @@
 <form name="webmark">
   <input type="url" name="url_input" ng-model="url.input" style="width: 25vw;" autofocus required>
+  <textarea id="url_content" ng-model="url.content" cols="30" rows="10"></textarea>
   <button type="button" name="button" ng-click="$wmfm.urlGet(webmark)">SUBMIT URL</button>
 </form>
 <dynamic-text ng-bind="url.input"></dynamic-text>
@@ -18,7 +19,7 @@
     <button id="cancel" type="button" name="button" ng-click="$wmfm.cancel(url.input)">CANCEL</button>
   </dialog-head>
 
-  <url-content>
+  <url-content id="displayed-content">
     <h3 ng-repeat="element in $wmfm.loaded.htags" ng-bind="element.content">
     </h3>
     <p ng-repeat="element in $wmfm.loaded.atags">
@@ -27,6 +28,6 @@
     </p>
   </url-content>
   <dialog-save>
-    <button id="save" type="button" name="button">SAVE URL</button>
+    <button id="save" type="button" name="button" ng-click="$wmfm.saveUrl(url)">SAVE URL</button>
   </dialog-save>
 </webmark-dialog>

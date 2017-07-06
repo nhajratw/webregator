@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" class="<%= controller_name %> <%= action_name %>">
   <head>
     <title>Webregator</title>
     <%= csrf_meta_tags %>
@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= yield %>
   </body>
 </html>

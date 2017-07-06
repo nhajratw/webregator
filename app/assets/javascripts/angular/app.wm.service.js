@@ -26,6 +26,15 @@ angular.module('wm.service')
         console.log('Error getting new url: ', error);
       });
     }; // END of getNew()
+    service.saveUrl = function(obj){
+      var saveUrl = $resource("/webmarks.json", {},{
+        create: { method: 'POST', isArray: false }
+      })
+      return saveUrl.create(obj, function(response){
+      }, function(error){
+        console.log(error, "Error for saveUrl.create()");
+      })
+    }; // END of saveUrl()
   }
 
 }());
