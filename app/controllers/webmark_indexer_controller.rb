@@ -4,6 +4,12 @@ class WebmarkIndexerController < ApplicationController
   require 'open-uri'
   def index
     @url_input = params[:wm_url]
+    if @url_input == nil
+      render :index
+      response.set_header("indexer_check", "No url chosen")
+      #example url
+      @url_input = "http://google.com"
+    end
     html_data = open(@url_input).read
     nokogiri_object = Nokogiri::HTML(html_data)
     @h_objects = nokogiri_object.css('h1', 'h2', 'h3')
