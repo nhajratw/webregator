@@ -14,4 +14,5 @@ angular.module('app', [
   }])
   // ADD Lodash
   .constant('_', window._)
+  .constant('Host', window.location.origin)
 }());
