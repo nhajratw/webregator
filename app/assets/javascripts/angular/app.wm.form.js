@@ -7,18 +7,20 @@ angular.module('webmarkForm', [])
     controller: webmarkForm,
     controllerAs: '$wmfm'
   })
-  webmarkForm.$inject = ['$scope', 'WebMark', '_'];
-  function webmarkForm($scope, WebMark, _) {
+  webmarkForm.$inject = ['$scope', '$rootScope', 'WebMark', '_'];
+  function webmarkForm($scope, $rootScope, WebMark, _) {
     var $wmfm = this;
     $scope.webformDialog = false;
 
     $wmfm.cancel = function(urlInput){
       $scope.webformDialog = !$scope.webformDialog;
+      $wmfm.errorUrl = true;
       $scope.url.input = '';
     }
     $wmfm.urlGet = function(webmark){
       $scope.webformDialog = (webmark.url_input.$valid)? true:false;
         if ($scope.webformDialog == true){
+          $wmfm.errorUrl = false;
           $wmfm.loaded = WebMark.getNew(webmark.url_input.$viewValue);
           $wmfm.loaded.$promise.then(function(response){
             var htags = [];
@@ -31,6 +33,8 @@ angular.module('webmarkForm', [])
             }, atags);
             var combo = htags.concat(atags);
             $scope.url.content = combo.join("");
+          }, function(error){
+            $wmfm.errorUrl = true;
           })
 
         }
@@ -38,6 +42,13 @@ angular.module('webmarkForm', [])
     $wmfm.saveUrl =function(url) {
       var entryObj = {url:url.input, content: url.content}
       WebMark.saveUrl(entryObj).$promise.then(function(response){
+        $scope.webformDialog = false;
+        $scope.url.input = '';
+        $scope.all = WebMark.getAll().$promise.then(function(response){
+          $rootScope.$broadcast('reloadWebmarks', response)
+        });
+
+
       }, function(errors){
           console.log('Errors on saveUrl', errors);
           $wmfm.errors = true;

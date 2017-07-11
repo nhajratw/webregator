@@ -7,9 +7,12 @@ angular.module('webmarkList', [])
     controller: webmarkList,
     controllerAs: '$wmlt'
   })
-  webmarkList.$inject = ['$scope', 'WebMark'];
-  function webmarkList($scope, WebMark) {
-    // webmarkList controller
-    this.webmarks = WebMark.getAll();
+  webmarkList.$inject = ['$scope', '$rootScope', 'WebMark'];
+  function webmarkList($scope, $rootScope, WebMark) {
+    var $wmlt = this;
+    $wmlt.webmarks = WebMark.getAll();
+    $rootScope.$on('reloadWebmarks', function (event, data) {
+      $wmlt.webmarks = data;
+    });
   }
 }());

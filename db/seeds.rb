@@ -1,3 +1,4 @@
+Webmark.delete_all
 
 webmark = Webmark.create!([
 {

@@ -102,6 +102,11 @@ button#save {
   margin: 4vh;
 }
 
+button#save:disabled {
+    color: #eaeaea;
+    background: rgba(250, 250, 250, .8);
+}
+
 h1#site-url {
   float:left;
   text-align: left;

@@ -20,6 +20,10 @@
   </dialog-head>
 
   <url-content id="displayed-content">
+    <error-url ng-hide="!$wmfm.errorUrl" style="color:red">
+      <p>Sorry, an error occured!</p>
+      Check out the entered url: <a href="{{url.input}}" target="_blank">{{url.input}}</a>
+    </error-url>
     <h3 ng-repeat="element in $wmfm.loaded.htags" ng-bind="element.content">
     </h3>
     <p ng-repeat="element in $wmfm.loaded.atags">
@@ -28,6 +32,6 @@
     </p>
   </url-content>
   <dialog-save>
-    <button id="save" type="button" name="button" ng-click="$wmfm.saveUrl(url)">SAVE URL</button>
+    <button id="save" type="button" name="button" ng-click="$wmfm.saveUrl(url)" ng-disabled="$wmfm.errorUrl">SAVE URL</button>
   </dialog-save>
 </webmark-dialog>
