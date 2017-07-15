@@ -12,6 +12,8 @@ class WebmarkIndexerController < ApplicationController
     end
     html_data = open(@url_input).read
     nokogiri_object = Nokogiri::HTML(html_data)
+    site = URI.parse(@url_input)
+    @host = site.scheme + '://' + site.host
     @h_objects = nokogiri_object.css('h1', 'h2', 'h3')
     @a_objects = nokogiri_object.css('a')
     @h_elements = Array.new
@@ -26,7 +28,11 @@ class WebmarkIndexerController < ApplicationController
 
     @a_objects.css("a").each do |response_node|
         hash = Hash.new
-        hash["a_link"] = response_node["href"]
+        if ( response_node["href"] =~ %r[^(http|https)://])
+          hash["a_link"] = response_node["href"]
+        else
+          hash["a_link"] = @host + response_node["href"]
+        end
       @a_elements << hash
     end
   end
