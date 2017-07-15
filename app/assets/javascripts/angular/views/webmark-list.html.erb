@@ -1,5 +1,12 @@
+<p ng-show="!$wmlt.webmarks.length" class="error">No Webmarks</p>
 <web-mark ng-repeat="wm in $wmlt.webmarks">
   <site-name ng-bind="wm.url"></site-name>
-  <button type="button" name="button">Delete</button>
-  <button type="button" name="button" ng-click="$wmlt.webmarkGo(wm.id)">View</button>
+  <button type="button" name="button"
+    ng-click="$wmlt.webmarkGo(wm.id)">
+    View
+  </button>
+  <button type="button" name="button"
+    ng-click="$wmlt.removeUrl(wm, $index)">
+    Delete
+  </button>
 </web-mark>

@@ -4,7 +4,7 @@ class WebmarksController < ApplicationController
   # GET /webmarks
   # GET /webmarks.json
   def index
-    @webmarks = Webmark.all
+    @webmarks = Webmark.order(id: :desc)
   end
 
   # GET /webmarks/1
@@ -55,10 +55,7 @@ class WebmarksController < ApplicationController
   # DELETE /webmarks/1.json
   def destroy
     @webmark.destroy
-    respond_to do |format|
-      format.html { redirect_to webmarks_url, notice: 'Webmark was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
