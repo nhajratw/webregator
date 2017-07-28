@@ -30,9 +30,12 @@ class WebmarkIndexerController < ApplicationController
         hash = Hash.new
         if ( response_node["href"] =~ %r[^(http|https)://])
           hash["a_link"] = response_node["href"]
-        else
+        elsif (response_node["href"] =~ %r[^/])
           hash["a_link"] = @host + response_node["href"]
+        else
+          next
         end
+
       @a_elements << hash
     end
   end
