@@ -11,3 +11,15 @@
 </p>
 
 <%= link_to 'Back', root_path %>
+
+<%= javascript_tag defer: 'defer' do -%>
+(function() {
+  'use strict';
+  // Add target _blank to all a tags
+  var atags = document.getElementsByTagName('a');
+  _.forEach(atags, function(value, key) {
+    value.setAttribute('target', '_blank')
+  });
+}());
+
+<% end -%>
