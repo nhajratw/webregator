@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+// HTTP Library
+import axios from 'axios';
+
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +22,12 @@ class NameForm extends React.Component {
     console.log('this', this);
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+  }
+  componentDidMount() {
+    axios.get(`/webmarks.json`)
+      .then(res => {
+        console.log(res.data, "Data with axios");
+      });
   }
 
   render() {
