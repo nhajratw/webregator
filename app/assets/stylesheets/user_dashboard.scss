@@ -57,6 +57,10 @@ webmark-list::-webkit-scrollbar-thumb, url-content::-webkit-scrollbar-thumb {
 html, body {
   position: relative;
 }
+
+.hidden {
+  display: none;
+}
 webmark-dialog {
     background: #eaeaea;
     display: block;
