@@ -50,23 +50,48 @@ class WebmarkForm extends React.Component {
   }
 }
 
+class DeleteWebmark extends React.Component {
+  render(){
+    return(
+      <button>Delete</button>
+    );
+  }
+}
+
+class ViewWebmark extends React.Component {
+  render(){
+    return(
+      <button>View</button>
+    );
+  }
+}
+
 class WebmarkList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      webmarks: []
+      webmarks: [],
+      webmarkResults: []
     };
   }
   componentDidMount() {
+    var webmark = [];
     axios.get(`/webmarks.json`)
       .then(res => {
-        console.log(res.data, "Data with axios");
+        const webmarks = res.data
+        this.setState({ webmarks });
       });
   }
   render(){
     return(
       <webmark-list>
-        <p>Webmark List</p>
+          {this.state.webmarks.map(obj =>
+            <webmark key={obj.id}>
+            <site-name>{obj.url}</site-name>
+            <ViewWebmark />
+            <DeleteWebmark /><br />
+            </webmark>
+          )}
       </webmark-list>
     );
   }
