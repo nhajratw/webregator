@@ -7,6 +7,7 @@ import axios from 'axios';
 
 // Webmark Dashboard Component
 class Dashboard extends React.Component {
+
   render(){
     return(
       <dashboard style={{textAlign: 'center'}}>
@@ -17,55 +18,97 @@ class Dashboard extends React.Component {
   }
 }
 
+// ** Webmark Form
 class WebmarkForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      results: true
+      results: false
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.cancelResults = this.cancelResults.bind(this);
+    this.saveUrl = this.saveUrl.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({results: true});
   }
 
   handleChange(event) {
     this.setState({value: event.target.value});
   }
-
-  handleSubmit(event) {
-    this.setState({results: true});
+  cancelResults(event) {
     event.preventDefault();
+    this.setState({results: false});
+  }
+  saveUrl(event) {
+    event.preventDefault();
+    console.log('saver');
   }
 
-  render() {
+  render(){
+    let resultsState = this.state.results ? 'block' : 'hidden';
     return (
-      <form onSubmit={this.handleSubmit}>
+      <main>
+        <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.value} onChange={this.handleChange} />
-          <input type="submit" value="Submit" />
+          <input type="submit" />
           <p>{this.state.value}</p>
-          <WebmarkResults />
-      </form>
+        </form>
+        <ResultWrapper
+          class={resultsState}
+          url={this.state.value}
+          cancel={this.cancelResults}
+          results=""
+          saver={this.saveUrl}
+        />
+      </main>
     );
   }
 }
 
-class DeleteWebmark extends React.Component {
-  render(){
-    return(
-      <button>Delete</button>
-    );
-  }
+function ResultWrapper(props){
+  return (
+    <webmark-dialog class={props.class}
+        value={props.url}
+        cancel={props.cancel}
+        results={props.results}
+        saver={props.saver}>
+      <dialog-head>
+        <SiteUrl url={props.url} />
+        <CancelWebmark onClick={props.cancel} />
+      </dialog-head>
+      <UrlResults results={props.results}/>
+      <ResultsSave saver={props.saver}/>
+    </webmark-dialog>
+  )
 }
 
-class ViewWebmark extends React.Component {
-  render(){
-    return(
-      <button>View</button>
-    );
-  }
+function SiteUrl(props){
+  return <h1 id="site-url">{props.url}</h1>;
+}
+function CancelWebmark(props){
+  return <button id="cancel" onClick={props.onClick}>CANCEL</button>
+}
+function UrlResults(props){
+  return (
+    <url-content results={props.results}>
+      <p>Results will go here</p>
+    </url-content>
+  );
+}
+function ResultsSave(props) {
+  return(
+    <dialog-save>
+      <button id="save" onClick={props.saver}>SAVE URL</button>
+    </dialog-save>
+  );
 }
 
+// ** Webmark List
 class WebmarkList extends React.Component {
   constructor(props){
     super(props);
@@ -97,60 +140,19 @@ class WebmarkList extends React.Component {
   }
 }
 
-// Webmark Results Component
-class WebmarkResults extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      display: false
-    };
-  }
-
-  render(){
-      return (
-        <webmark-dialog class={this.state.display ? 'block' : 'hidden'}>
-            <ResultsMenu/>
-        </webmark-dialog>
-      );
-  }
-}
-
-class ResultsMenu extends React.Component {
+// ** Webmark List Elements
+class DeleteWebmark extends React.Component {
   render(){
     return(
-      <dialog-head>
-      <h1 id="site-url">Site Url</h1>
-      <button id="cancel" type="button" name="button">CANCEL</button>
-      </dialog-head>
+      <button>Delete</button>
     );
   }
 }
 
-class ResultsSection extends React.Component {
+class ViewWebmark extends React.Component {
   render(){
     return(
-      <url-content>
-      </url-content>
-    );
-  }
-}
-
-class ResultsListing extends React.Component {
-  render(){
-    return(
-      <p>
-        List of results
-      </p>
-    );
-  }
-}
-
-class ResultsSave extends React.Component {
-  render(){
-    return(
-      <dialog-save>
-        <button id="save">SAVE URL</button>
-      </dialog-save>
+      <button>View</button>
     );
   }
 }

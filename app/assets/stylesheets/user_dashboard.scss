@@ -60,6 +60,11 @@ html, body {
 
 .hidden {
   display: none;
+  z-index: -1;
+}
+.block {
+  display: block;
+  z-index: 1;
 }
 webmark-dialog {
     background: #eaeaea;
