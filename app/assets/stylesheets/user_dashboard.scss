@@ -18,6 +18,10 @@ input, button {
   background: #FFF;
 }
 
+button, input[type="submit"] {
+  cursor: pointer;
+}
+
 dynamic-text {
   display: block;
   height: 5vh;

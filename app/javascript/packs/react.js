@@ -252,7 +252,7 @@ class WebmarkList extends React.Component {
           {this.state.webmarks.map(obj =>
             <webmark key={obj.id}>
             <site-name>{obj.url}</site-name>
-            <ViewWebmark />
+            <ViewWebmark id={obj.id}/>
             <DeleteWebmark /><br />
             </webmark>
           )}
@@ -270,12 +270,11 @@ class DeleteWebmark extends React.Component {
   }
 }
 
-class ViewWebmark extends React.Component {
-  render(){
+function ViewWebmark(props) {
+    let webmarks = 'webmarks/'
     return(
-      <button>View</button>
+      <a href={webmarks + props.id} target="_blank"><button>View</button></a>
     );
-  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
