@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 // HTTP Library
 import axios from 'axios';
+import lodash from 'lodash'
 
 // Webmark Dashboard Component
 class Dashboard extends React.Component {
@@ -26,7 +27,8 @@ class WebmarkForm extends React.Component {
       value: '',
       results: false,
       loadError: null,
-      dataResults:[]
+      dataResults:[],
+      csrfToken: document.getElementsByName("csrf-token")[0].content
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,7 +68,37 @@ class WebmarkForm extends React.Component {
   }
   saveUrl(event) {
     event.preventDefault();
-    console.log('saver');
+    let htags = [];
+    let atags = [];
+    _.forEach(this.state.dataResults.htags, function(value) {
+      htags.push('<h3>' + value.content + '</h3>')
+    });
+    _.forEach(this.state.dataResults.atags, function(value) {
+      atags.push('<a href="' + value.a_link + '">' + value.a_link +'</a><br>')
+    });
+    let combo = _.concat(htags,atags);
+    let urlContent = _.join(combo, '');
+
+    // Api to save
+    axios({
+      method: 'POST',
+      params: {
+        authenticity_token: this.state.csrfToken
+      },
+      url: "/webmarks.json",
+      data: {
+        url: this.state.value,
+        content: urlContent
+      }
+    })
+      .then(function (response) {
+        location.reload();
+        // Going to add Redux or refactor component
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
   }
 
   render(){
