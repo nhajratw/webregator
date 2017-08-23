@@ -11,6 +11,9 @@ gem 'lodash-rails'
 
 gem "responders"
 
+# Webpacker
+gem 'webpacker'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record

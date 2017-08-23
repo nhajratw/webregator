@@ -24,3 +24,5 @@
 
 vendor/assets/bower_components
 vendor/local
+/public/packs
+/node_modules

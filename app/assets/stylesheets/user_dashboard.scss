@@ -18,6 +18,10 @@ input, button {
   background: #FFF;
 }
 
+button, input[type="submit"] {
+  cursor: pointer;
+}
+
 dynamic-text {
   display: block;
   height: 5vh;
@@ -56,6 +60,15 @@ webmark-list::-webkit-scrollbar-thumb, url-content::-webkit-scrollbar-thumb {
 // Webmark dialog
 html, body {
   position: relative;
+}
+
+.hidden {
+  display: none;
+  z-index: -1;
+}
+.block {
+  display: block;
+  z-index: 1;
 }
 webmark-dialog {
     background: #eaeaea;
