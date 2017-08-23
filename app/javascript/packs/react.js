@@ -235,8 +235,11 @@ class WebmarkList extends React.Component {
     super(props);
     this.state = {
       webmarks: [],
-      webmarkResults: []
+      webmarkResults: [],
+      csrfToken: document.getElementsByName("csrf-token")[0].content
     };
+
+    this.deleteWebmark = this.deleteWebmark.bind(this);
   }
   componentDidMount() {
     var webmark = [];
@@ -246,6 +249,24 @@ class WebmarkList extends React.Component {
         this.setState({ webmarks });
       });
   }
+  deleteWebmark(event){
+    event.preventDefault();
+    // Api to delete
+    axios({
+      method: 'DELETE',
+      params: {
+        authenticity_token: this.state.csrfToken
+      },
+      url: "/webmarks/" + event.target.id
+    })
+      .then(function (response) {
+        location.reload();
+        //Going to add Redux or refactor component
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   render(){
     return(
       <webmark-list>
@@ -253,7 +274,7 @@ class WebmarkList extends React.Component {
             <webmark key={obj.id}>
             <site-name>{obj.url}</site-name>
             <ViewWebmark id={obj.id}/>
-            <DeleteWebmark /><br />
+            <DeleteWebmark id={obj.id} onClick={this.deleteWebmark} /><br />
             </webmark>
           )}
       </webmark-list>
@@ -262,12 +283,10 @@ class WebmarkList extends React.Component {
 }
 
 // ** Webmark List Elements
-class DeleteWebmark extends React.Component {
-  render(){
+function DeleteWebmark(props) {
     return(
-      <button>Delete</button>
+      <button onClick={props.onClick} id={props.id} >Delete</button>
     );
-  }
 }
 
 function ViewWebmark(props) {
