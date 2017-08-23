@@ -106,7 +106,7 @@ class WebmarkForm extends React.Component {
     let infoControl = (this.state.value.length>=1) ? <p>{this.state.value}</p> : <Instructions />;
     // Validations
     let $validUrl = this.state.value.match('^(http|https)://');
-    let $validClass = $validUrl ? 'hidden' : 'error';
+    let $validClass = ($validUrl || this.state.value.length==0) ? 'hidden' : 'error';
     let $validData = this.state.loadError ? 'block' : 'hidden';
 
     // Load Error
