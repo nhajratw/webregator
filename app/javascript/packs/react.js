@@ -25,11 +25,13 @@ class WebmarkForm extends React.Component {
     this.state = {
       value: '',
       results: false,
+      loadError: null,
       dataResults:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.cancelResults = this.cancelResults.bind(this);
+    this.cancelErrorInput = this.cancelErrorInput.bind(this);
     this.saveUrl = this.saveUrl.bind(this);
   }
 
@@ -43,6 +45,9 @@ class WebmarkForm extends React.Component {
       .then(res => {
         this.setState({ dataResults: res.data });
         this.setState({results: true});
+      }).catch(res => {
+        console.log("error loading!", res);
+        this.setState({loadError: true});
       });
   }
 
@@ -52,6 +57,12 @@ class WebmarkForm extends React.Component {
   cancelResults(event) {
     event.preventDefault();
     this.setState({results: false});
+    this.state.value = '';
+  }
+  cancelErrorInput(event){
+    event.preventDefault();
+    this.setState({loadError: null});
+    this.state.value = '';
   }
   saveUrl(event) {
     event.preventDefault();
@@ -59,6 +70,23 @@ class WebmarkForm extends React.Component {
   }
 
   render(){
+    // Info
+    let infoControl = (this.state.value.length>=1) ? <p>{this.state.value}</p> : <Instructions />;
+    // Validations
+    let $validUrl = this.state.value.match('^(http|https)://');
+    let $validClass = $validUrl ? 'hidden' : 'error';
+    let $validData = this.state.loadError ? 'block' : 'hidden';
+
+    // Load Error
+    let loadError = (
+      <webmark-dialog class={$validData}>
+        <dialog-head>
+          <CancelWebmark onClick={this.cancelErrorInput} />
+        </dialog-head>
+        <ValidationMessage error="loadError" url={this.state.value} />
+      </webmark-dialog>
+    );
+
     let dataResults = this.state.dataResults;
     let renderResults = (
       <ResultWrapper
@@ -69,14 +97,15 @@ class WebmarkForm extends React.Component {
         saver={this.saveUrl}
       />
     );
-    let resultsState = this.state.results ? renderResults : <no-results></no-results>
+    let resultsState = (this.state.results && !this.state.loadError) ? renderResults : loadError;
 
     return (
       <main>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <input type="url" value={this.state.value} onChange={this.handleChange} required/>
           <input type="submit" />
-          <p>{this.state.value}</p>
+          {infoControl}
+          <ValidationMessage error="linkFormat" url={this.state.value} class={$validClass} />
         </form>
         {resultsState}
       </main>
@@ -99,6 +128,45 @@ function ResultWrapper(props){
       <ResultsSave saver={props.saver}/>
     </webmark-dialog>
   )
+}
+
+function Instructions(props){
+
+  return (
+    <instructions>
+      <p className="instructions">Enter a link</p>
+    </instructions>
+
+  );
+}
+
+function ValidationMessage(props){
+  let linkFormat = (<p className="error">Enter a valid link starting with http or https</p>);
+  let loadError = (<error-url style={{color:'red'}}>
+        <p>Sorry, an error occured while loading the url!</p>
+        Check out the entered url: <a href={props.url} target="_blank">{props.url}</a>
+      </error-url>);
+  let error = {
+    linkFormat,
+    loadError
+  }
+
+  let errorInput = props.error;
+  let errorMessage = null;
+  switch(errorInput) {
+    case "linkFormat":
+        errorMessage = error.linkFormat;
+        break;
+    case "loadError":
+        errorMessage = error.loadError;
+        break;
+  }
+
+  return (
+    <error className={props.class}>
+        {errorMessage}
+    </error>
+  );
 }
 
 function SiteUrl(props){
