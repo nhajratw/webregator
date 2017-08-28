@@ -1,0 +1,49 @@
+<%= javascript_pack_tag 'landing' %>
+<%= stylesheet_link_tag    'landing/index' %>
+
+<landing>
+  <nav>
+    <div class="nav-wrapper" style="background:#479CC3;">
+      <a href="#" class="brand-logo">Webregator</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/angular">Angular</a></li>
+        <li><a href="/react">React</a></li>
+        <li><a href="/#">About</a></li>
+      </ul>
+    </div>
+  </nav>
+  <hero>
+    <h1>A webpage content saving app</h1>
+    <div class="row">
+      <div class="col m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">React Version</span>
+            <p>
+              This is a version of the app made with React and webpacks.
+              For consuming the APIS, Axios was chosen.
+            </p>
+          </div>
+          <div class="card-action">
+            <a href="/react">Check it out</a>
+          </div>
+        </div>
+      </div>
+      <div class="col m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">AngularJS Version</span>
+            <p>
+              This is the original version of the app
+              and was composed quickly because the app's original focus was
+              to highlight the backend code.
+            </p>
+          </div>
+          <div class="card-action">
+            <a href="/angular">Check it out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </hero>
+</landing>

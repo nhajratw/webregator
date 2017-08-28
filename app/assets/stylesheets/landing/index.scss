@@ -1,0 +1,27 @@
+// Landing Styles
+@import "materialize";
+
+body.landing, html {
+  height: 100vh;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+landing {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background: #ECEFF1;
+}
+h1 {
+  text-align: center;
+  padding: 10vh 0vh;
+}
+
+.card .card-content {
+  height: 20vh;
+}

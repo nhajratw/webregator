@@ -1,6 +1,4 @@
-// Place all the styles related to the userDashboard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Main styles
 html.user_dashboard.index, body.user_dashboard.index {
     overflow: hidden;
     height: 100vh;
@@ -126,4 +124,12 @@ h1#site-url {
   width:50vw;
   color: #fff;
   margin: 6vh 2vw;
+}
+
+.error {
+  color:#673AB7;
+}
+
+textarea#url_content {
+  display: none;
 }

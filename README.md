@@ -9,7 +9,7 @@ A webapp that generates and saves all h tags and a tags from a website to the da
  - foreman start
 
 ## Versions
- - On root: Angular version
+ - Angular: localhost:5555/react
  - React: localhost:5555/react
 
 ## Testing

@@ -11,6 +11,8 @@ gem 'lodash-rails'
 
 gem "responders"
 
+gem 'materialize-sass'
+
 # Webpacker
 gem 'webpacker'
 
