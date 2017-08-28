@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require lodash
-//= require angular/angular
-//= require angular-resource/angular-resource
+//= require angular
+//= require angular-resource
 //= require angular-rails-templates
 //= require_tree ./angular/views
 //= require rails-ujs
