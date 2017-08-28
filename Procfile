@@ -1,2 +1,2 @@
-web: rails s -p 5555
+web: rails s -p 5554
 webpacker: ./bin/webpack-dev-server
