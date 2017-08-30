@@ -5,11 +5,11 @@ A webapp that generates and saves all h tags and a tags from a website to the da
  - rake bower:install
  - yarn install
 
-## Serve app
- - foreman start
+## Serve app on development
+ - foreman start -f Procfile.dev
 
 ## Versions
- - Angular: localhost:5555/react
+ - Angular: localhost:5555/angular
  - React: localhost:5555/react
 
 ## Testing
